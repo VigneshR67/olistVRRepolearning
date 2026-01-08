@@ -6,3 +6,5 @@ __pycache__/
 #OS files
 .DS_Store
 
+#logs
+*.logs
