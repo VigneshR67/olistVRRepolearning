@@ -3,7 +3,7 @@ from .ingestion_exception import (IngestionException,
                                 SchemaValidationException,
                                 FileRejectedException)
 
-__All__ = [
+__all__ = [
     "IngestionException",
     "FileNotFoundException",
     "SchemaValidationException",
