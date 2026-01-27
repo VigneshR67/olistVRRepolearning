@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "raw-ingestion"
+version = "0.1.0"
+description = "Bronze ingestion framework for Databricks"
+requires-python = ">=3.9"
+
+dependencies = [
+    "pyspark"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

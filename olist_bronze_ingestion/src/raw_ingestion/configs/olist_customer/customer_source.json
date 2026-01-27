@@ -1,0 +1,29 @@
+{
+  "source_name": "olist_customers",
+  "zipped":true,
+  "file_format": "csv",
+  "bucketname":"vrdatabaselearningadls",
+  "landing_path": "/olistnbound/olist_customers/",
+  "raw_table": "raw.olist_customers",
+  
+  "spark_properties":{"spark_sql_shuffle_partitions":"20"}
+  "schema": {
+    "schema_file": ".configs/olist_customer/customer_source.json",
+    "enforce_nullable": true,
+    "allow_extra_columns": true
+  },
+
+  "ingestion_rules": {
+    "reject_empty_files": true
+  },
+
+  "file_pattern": {
+    "regex": "olist_customers_dataset.csv.zip"
+  },
+
+  "read_options": {
+    "header": true,
+    "delimiter": ",",
+    "mode": "PERMISSIVE"
+  }
+}
