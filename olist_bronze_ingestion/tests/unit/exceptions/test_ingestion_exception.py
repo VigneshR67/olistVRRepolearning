@@ -1,6 +1,6 @@
 import pytest
 
-from src.raw_ingestion.exceptions import ( IngestionException,
+from olist_bronze_ingestion.src.raw_ingestion.exceptions import ( IngestionException,
     FileNotFoundException,
     SchemaValidationException,
     FileRejectedException)

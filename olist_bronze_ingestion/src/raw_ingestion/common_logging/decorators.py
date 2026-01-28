@@ -1,7 +1,7 @@
 import time
 import functools
 from typing import Callable, Type
-from raw_ingestion.common_logging.logger import get_logger
+from olist_bronze_ingestion.src.raw_ingestion.common_logging.logger import get_logger
 
 
 def log_execution(step_name: str | None = None):
