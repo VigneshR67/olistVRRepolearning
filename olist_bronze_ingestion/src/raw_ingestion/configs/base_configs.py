@@ -2,8 +2,9 @@
 #rejection rules - are set at json level
 #email configs ( will also need to check if we can set this at the task level)
 
-from dataclasses import dataclass
+from dataclasses import dataclass,field
 from typing import List, Optional
+import re
 
 @dataclass
 class ColumnConfig:

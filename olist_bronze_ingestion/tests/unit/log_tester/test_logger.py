@@ -1,4 +1,9 @@
-from olist_bronze_ingestion.src.raw_ingestion.common_logging import get_logger
+import sys
+import os
+
+sys.path.append('./src')
+
+from raw_ingestion.common_logging import get_logger
 import logging
 
 def test_log_get_name():

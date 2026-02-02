@@ -2,9 +2,13 @@
 __pycache__/
 *.pyc
 .env
+.pytest_cache
+.pyi
+.json
 
 #OS files
 .DS_Store
+.TAG
 
 #logs
 *.logs

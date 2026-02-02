@@ -1,13 +1,13 @@
 #check if valid schema
 
-from pyspark.sql import Dataframe
+from pyspark.sql import DataFrame
 from pyspark.sql.types import StructType
 from raw_ingestion.exceptions import SchemaValidationException
 
 def _schema_to_dict(schema: StructType) -> dict:
-    return {field.name: field.dataType.simpleSting() for field in schema.fields}
+    return {field.name: field.dataType.simpleString() for field in schema.fields}
 
-def validate_schema(df: Dataframe, expected_schema: StructType,strict: bool = True)-> None:
+def validate_schema(df: DataFrame, expected_schema: StructType,strict: bool = True)-> None:
     """
     validates datafame schema against expected schema
     """
@@ -18,12 +18,14 @@ def validate_schema(df: Dataframe, expected_schema: StructType,strict: bool = Tr
     actual_schema = _schema_to_dict(df.schema)
     expected_schema = _schema_to_dict(expected_schema)
 
-      missing_cols = expected_cols - actual_cols
+    actual_cols = set(actual_schema.keys())
+    expected_cols = set(expected_schema.keys())
+    
+    missing_cols = expected_cols - actual_cols
     if missing_cols:
         raise SchemaValidationException(
             f"Missing required columns: {sorted(missing_cols)}"
         )
-
     if strict:
         extra_cols = actual_cols - expected_cols
         if extra_cols:
@@ -33,9 +35,9 @@ def validate_schema(df: Dataframe, expected_schema: StructType,strict: bool = Tr
 
     mismatched_types = []
     for col in expected_cols & actual_cols:
-        if actual[col] != expected[col]:
+        if actual_schema[col] != expected_schema[col]:
             mismatched_types.append(
-                f"{col} (expected={expected[col]}, actual={actual[col]})"
+                f"{col} (expected={expected_schema[col]}, actual={actual_schema[col]})"
             )
 
     if mismatched_types:

@@ -1,5 +1,5 @@
 from pathlib import Path
-import raw_ingestion.exceptions import FileNotFoundException,FileRejectedException
+from raw_ingestion.exceptions import FileNotFoundException,FileRejectedException
 
 #pathlib is a python module alternative to os.path giving OOO approach to system path 
 def validate_file_exists(file_path :str)-> None:

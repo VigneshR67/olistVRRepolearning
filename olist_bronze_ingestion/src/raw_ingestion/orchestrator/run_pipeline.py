@@ -4,7 +4,6 @@ from raw_ingestion.orchestrator.step_executor import (
     execute_validation,
     execute_write
 )
-
 from raw_ingestion.readers import ReaderFactory
 from raw_ingestion.writers import WriterFactory
 from raw_ingestion.validators import get_validator
