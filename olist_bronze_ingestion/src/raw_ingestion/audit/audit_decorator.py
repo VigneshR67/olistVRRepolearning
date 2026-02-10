@@ -27,9 +27,9 @@ def audit_step(step_name: str, collector):
                         start_time=start_time,
                         end_time=datetime.utcnow().isoformat(),
                         duration_seconds=round(end_ts - start_ts, 3),
-                        records_read=getattr(result, "count", None)
+                        records_read=result.count() if hasattr(result, "count") else None
                         if step_name == "read" else None,
-                        records_written=getattr(result, "count", None)
+                        records_written=result.count() if hasattr(result, "count") else None
                         if step_name == "write" else None
                     )
                 )

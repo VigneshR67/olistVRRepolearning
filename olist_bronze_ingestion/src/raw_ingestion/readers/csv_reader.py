@@ -9,20 +9,20 @@ class CsvReader(BaseReader):
         "mode": "FAILFAST"
     }
     
-    def read(self,spark,path:str,read_options:dict|None=None, schema=None)->Dataframe:
+    def read(self,spark,path:str,read_options:dict|None=None, schema=None)->DataFrame:
 
     
 
-    options = {
+        options = {
             **self.DEFAULT_OPTIONS,
             **(read_options or {})
         }
     
-    reader = {
-        spark.read.format("csv").options(**options)
-    }
+        reader = spark.read.format("csv").options(**options)
+        
     
-    if schema:
-        reader = reader.schema(schema)
-    
-    return reader.load(path)
+        if schema:
+             reader = reader.schema(schema)
+        df = reader.load(path)
+
+        return df

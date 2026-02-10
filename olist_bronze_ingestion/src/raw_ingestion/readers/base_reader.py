@@ -3,7 +3,7 @@ from pyspark.sql import DataFrame
 
 class BaseReader(ABC):
     @abstractmethod
-    def read(self,spark,path:str,read_options:dict|None=None,schema=None)->Dataframe:
+    def read(self,spark,path:str,read_options:dict|None=None,schema=None)->DataFrame:
         pass
 
 

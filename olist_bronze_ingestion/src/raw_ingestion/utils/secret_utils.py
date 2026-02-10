@@ -1,1 +1,0 @@
-#should be reading from databricks secret scope

@@ -9,10 +9,11 @@ Type_Mapping = {
     "timestamp":TimestampType()
 }
 
-def load_schema(spark,schemaPath:str,enforce_strict: bool) -> StructType:
+def load_schema(spark,schemaPath:str,enforce_strict: bool,context:dict) -> StructType:
     with open(schemaPath) as f:
         schema = json.load(f)
     fields = []
+    context.logger.info(f"Inside schema loader{schema}")
     for field in schema["columns"]:
-        fields.append(StructField(field["name"]),Type_Mapping[field["type"]],field.get("nullable",True))
+        fields.append(StructField(field["name"],Type_Mapping[field["type"]],field.get("nullable",True)))
     return StructType(fields)

@@ -3,7 +3,7 @@ from raw_ingestion.validators.file_validators import (validate_file_exists,
                                                       validate_file_extension)
 
 from raw_ingestion.validators.schema_validator import validate_schema
-from raw_ingestion.validators.data_quality_validators import (validate_not_null,
+from raw_ingestion.validators.data_quality_validator import (validate_not_null,
                                                               validate_uniqueness)
 
 File_validators={
@@ -34,6 +34,6 @@ def get_validators(validator_type:str,name:str):
     }
 
     try:
-        registry[validator_type][name]
+        return registry[validator_type][name]
     except KeyError:
         raise ValueError(f"Validator not found: type ={validator_type}, name ={name}")

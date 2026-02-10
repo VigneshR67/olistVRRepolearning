@@ -7,20 +7,20 @@ class ParquetReader(BaseReader):
         "mergeSchema": "false"
     }
 
-    def read(self,spark,path:str,read_options:dict|None=None, schema=None)->Dataframe:
+    def read(self,spark,path:str,read_options:dict|None=None, schema=None)->DataFrame:
 
     
 
-    options = {
-            **self.DEFAULT_OPTIONS,
-            **(read_options or {})
-        }
+            options = {
+                  **self.DEFAULT_OPTIONS,
+                  **(read_options or {})
+             }
     
-    reader = {
-        spark.read.format("parquet").options(**options)
-    }
+            reader = {
+                 spark.read.format("parquet").options(**options)
+                }
     
-    if schema:
-        reader = reader.schema(schema)
+            if schema:
+                reader = reader.schema(schema)
     
-    return reader.load(path)
+            return reader.load(path)

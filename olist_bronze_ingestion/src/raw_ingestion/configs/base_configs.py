@@ -2,7 +2,7 @@
 #rejection rules - are set at json level
 #email configs ( will also need to check if we can set this at the task level)
 
-from dataclasses import dataclass,field
+from dataclasses import dataclass,field, asdict
 from typing import List, Optional
 import re
 
@@ -55,6 +55,8 @@ class ReadOptionsConfig:
     delimiter: str = ","
     mode: str = "PERMISSIVE" #need to read more on mode ( how to pass)
     #dynamically to these variables. DROPMALFORMED, FAIL_FAST
+    def to_dict(self):
+        return asdict(self)
 
 #these are default properties
 @dataclass
@@ -73,11 +75,13 @@ class SourceConfig:
     landing_path: str
     raw_table: str
     file_format: str
+    audit_path:str
+    writer_format:str
 
     schema: SchemaConfig
     ingestion_rules: IngestionRulesConfig
     file_pattern: FilePatternConfig
-    read_options: ReadOptionsConfig
+    read_options: ReadOptionsConfig 
     spark_config: SparkProperties
 
     #this is just to validate configs, because there is possibility to mess up the source json
@@ -103,6 +107,8 @@ def load_source_config(path: str) -> SourceConfig:
         landing_path=data["landing_path"],
         raw_table=data["raw_table"],
         file_format=data["file_format"],
+        audit_path=data["audit_path"],
+        writer_format = data["writer_format"],
         schema=SchemaConfig(**data.get("schema", {})),
         ingestion_rules=IngestionRulesConfig(**data.get("ingestion_rules", {})),
         file_pattern=FilePatternConfig(**data.get("file_pattern", {})),
